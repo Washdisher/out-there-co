@@ -159,11 +159,6 @@
 
     .nav-links a:hover { color: var(--rust); }
 
-    @media (max-width: 640px) {
-      .nav-links a:not(.nav-cta) { display: none; }
-      .nav-inner { padding: 16px 20px; }
-    }
-
     .nav-cta {
       background: var(--pine-deep);
       color: var(--cream) !important;
@@ -173,6 +168,64 @@
     }
 
     .nav-cta:hover { background: var(--rust) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--pine-deep);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      background: var(--pine-deep);
+      border-top: 1px solid rgba(245, 239, 226, 0.08);
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      color: rgba(245, 239, 226, 0.8);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(245, 239, 226, 0.07);
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover { color: var(--cream); }
+
+    .nav-mobile .mobile-cta {
+      color: #e8a672 !important;
+      font-family: var(--font-mono);
+      font-size: 12px !important;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { padding: 16px 20px; }
+    }
 
     /* ══════════════════════════════════════════════
        HERO
@@ -860,6 +913,16 @@
         <a href="field-notes.html">Field Notes</a>
         <a href="#signup" class="nav-cta">Join the List</a>
       </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#dispatch">The Channel</a>
+      <a href="#pillars">What We Film</a>
+      <a href="#crew">The Crew</a>
+      <a href="field-notes.html">Field Notes</a>
+      <a href="#signup" class="mobile-cta">Join the List</a>
     </div>
   </nav>
 
@@ -1181,6 +1244,18 @@
   </footer>
 
   <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }));
+
     // Launch countdown — May 1, 2026 midnight ET
     const LAUNCH = new Date('2026-05-01T00:00:00-04:00');
     const countdownEl = document.getElementById('countdown');

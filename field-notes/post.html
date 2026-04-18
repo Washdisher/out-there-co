@@ -111,11 +111,6 @@
     .nav-links a:hover { color: var(--rust); }
     .nav-links a.active { color: var(--pine-deep); font-weight: 600; }
 
-    @media (max-width: 640px) {
-      .nav-links a:not(.nav-cta) { display: none; }
-      .nav-inner { padding: 16px 20px; }
-    }
-
     .nav-cta {
       background: var(--pine-deep);
       color: var(--cream) !important;
@@ -125,6 +120,64 @@
     }
 
     .nav-cta:hover { background: var(--rust) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--pine-deep);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      background: var(--pine-deep);
+      border-top: 1px solid rgba(245, 239, 226, 0.08);
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      color: rgba(245, 239, 226, 0.8);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(245, 239, 226, 0.07);
+      transition: color 0.2s;
+    }
+
+    .nav-mobile a:hover { color: var(--cream); }
+
+    .nav-mobile .mobile-cta {
+      color: #e8a672 !important;
+      font-family: var(--font-mono);
+      font-size: 12px !important;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-inner { padding: 16px 20px; }
+    }
 
     /* ARTICLE LAYOUT */
     .article-wrap {
@@ -309,6 +362,15 @@
         <a href="../field-notes.html" class="active">Field Notes</a>
         <a href="../index.html#signup" class="nav-cta">Join the List</a>
       </div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="../index.html#dispatch">The Channel</a>
+      <a href="../index.html#pillars">What We Film</a>
+      <a href="../field-notes.html">Field Notes</a>
+      <a href="../index.html#signup" class="mobile-cta">Join the List</a>
     </div>
   </nav>
 
@@ -346,6 +408,18 @@
   </footer>
 
   <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileNav = document.getElementById('nav-mobile');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }));
+
     function formatDate(str) {
       const d = new Date(str + 'T00:00:00');
       return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
