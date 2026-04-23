@@ -6,9 +6,7 @@
     "category": "Gear Review",
     "excerpt": "We put the St. Croix Bass X through a full season on the South Shore — freshwater, saltwater flats, and everything in between. Here's the full verdict.",
     "body": [
-      "Replace this with your article content. Each string in this array becomes a paragraph. You can have as many as you need.",
-      "This is the second paragraph. Keep adding strings to this array to add more paragraphs to your post.",
-      "When you're done writing, update the title, date, category, excerpt, and slug fields above to match your article. The slug should be lowercase with hyphens — it becomes the URL."
+      
     ]
   },
   {
@@ -18,9 +16,7 @@
     "category": "Trip Report",
     "excerpt": "April on the South Shore is hit or miss. We logged four sessions in two weeks and came away with a few observations worth writing down.",
     "body": [
-      "Replace this with your trip report. Describe where you went, what you used, and what happened.",
-      "Second paragraph goes here. Add as many as you need by adding more strings to this array.",
-      "Close it out however you want — a takeaway, what you'd do differently, or just how the day ended."
+      
     ]
   }
 ]
